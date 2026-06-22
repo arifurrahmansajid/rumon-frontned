@@ -4,7 +4,7 @@ async function loadProjects() {
     if (!portfolioGrid) return;
 
     try {
-        const response = await fetch('http://localhost:5000/api/projects');
+        const response = await fetch('https://backend-twze.vercel.app/api/projects');
         if (!response.ok) throw new Error('Failed to fetch projects');
         
         const projects = (await response.json()).slice(0, 6);
@@ -36,9 +36,12 @@ function createPortfolioCard(project) {
     
     let imageUrl = './Assets/1.jpg';
     if (project.image) {
-        imageUrl = project.image.startsWith('http') 
-            ? project.image 
-            : `http://localhost:5000/${project.image}`;
+        // Base64 data URLs stored directly in MongoDB display directly
+        if (project.image.startsWith('data:') || project.image.startsWith('http')) {
+            imageUrl = project.image;
+        } else {
+            imageUrl = `https://backend-twze.vercel.app/${project.image}`;
+        }
     }
 
     card.innerHTML = `

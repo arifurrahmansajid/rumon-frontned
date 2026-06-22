@@ -1,13 +1,15 @@
-const API_BASE_URL = "http://localhost:5000/api";
+const API_BASE_URL = "https://backend-twze.vercel.app/api";
 const DEFAULT_IMAGE = "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1000";
 
 function resolveImageUrl(rawUrl) {
     if (!rawUrl || typeof rawUrl !== "string") return DEFAULT_IMAGE;
     const trimmed = rawUrl.trim();
     if (!trimmed) return DEFAULT_IMAGE;
+    // Base64 data URLs stored directly in MongoDB
+    if (trimmed.startsWith("data:")) return trimmed;
     if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) return trimmed;
-    if (trimmed.startsWith("/uploads/")) return `http://localhost:5000${trimmed}`;
-    if (trimmed.startsWith("uploads/")) return `http://localhost:5000/${trimmed}`;
+    if (trimmed.startsWith("/uploads/")) return `https://backend-twze.vercel.app${trimmed}`;
+    if (trimmed.startsWith("uploads/")) return `https://backend-twze.vercel.app/${trimmed}`;
     return trimmed;
 }
 

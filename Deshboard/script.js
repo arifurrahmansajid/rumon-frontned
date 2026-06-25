@@ -71,6 +71,10 @@ function resolveImageUrl(rawUrl) {
         trimmed = trimmed.replace("http://localhost:5000", "https://backend-twze.vercel.app");
     }
 
+    if (trimmed.length > 500 && !trimmed.startsWith('data:') && !trimmed.startsWith('http')) {
+        trimmed = 'data:image/jpeg;base64,' + trimmed;
+    }
+
     // Base64 data URLs stored directly in MongoDB
     if (trimmed.startsWith("data:")) return trimmed;
     // Regular https:// URLs (external images entered via URL field)

@@ -41,6 +41,11 @@ function createPortfolioCard(project) {
             tempImage = tempImage.replace('http://localhost:5000', 'https://backend-twze.vercel.app');
         }
 
+        // Handle raw base64 strings missing the data: prefix
+        if (tempImage.length > 500 && !tempImage.startsWith('data:') && !tempImage.startsWith('http')) {
+            tempImage = 'data:image/jpeg;base64,' + tempImage;
+        }
+
         // Base64 data URLs stored directly in MongoDB display directly
         if (tempImage.startsWith('data:') || tempImage.startsWith('http')) {
             imageUrl = tempImage;

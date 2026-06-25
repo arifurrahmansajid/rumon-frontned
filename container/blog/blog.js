@@ -62,6 +62,10 @@ function createBlogCard(blog) {
             tempImage = tempImage.replace('http://localhost:5000', 'https://backend-twze.vercel.app');
         }
         
+        if (tempImage.length > 500 && !tempImage.startsWith('data:') && !tempImage.startsWith('http')) {
+            tempImage = 'data:image/jpeg;base64,' + tempImage;
+        }
+
         imageUrl = tempImage.startsWith('data:') || tempImage.startsWith('http') 
             ? tempImage 
             : `https://backend-twze.vercel.app/${tempImage}`;

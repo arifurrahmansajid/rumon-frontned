@@ -36,11 +36,16 @@ function createPortfolioCard(project) {
     
     let imageUrl = './Assets/1.jpg';
     if (project.image) {
+        let tempImage = project.image;
+        if (tempImage.includes('localhost:5000')) {
+            tempImage = tempImage.replace('http://localhost:5000', 'https://backend-twze.vercel.app');
+        }
+
         // Base64 data URLs stored directly in MongoDB display directly
-        if (project.image.startsWith('data:') || project.image.startsWith('http')) {
-            imageUrl = project.image;
+        if (tempImage.startsWith('data:') || tempImage.startsWith('http')) {
+            imageUrl = tempImage;
         } else {
-            imageUrl = `https://backend-twze.vercel.app/${project.image}`;
+            imageUrl = `https://backend-twze.vercel.app/${tempImage}`;
         }
     }
 

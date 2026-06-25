@@ -3,8 +3,14 @@ const DEFAULT_IMAGE = "https://images.unsplash.com/photo-1550751827-4bd374c3f58b
 
 function resolveImageUrl(rawUrl) {
     if (!rawUrl || typeof rawUrl !== "string") return DEFAULT_IMAGE;
-    const trimmed = rawUrl.trim();
+    let trimmed = rawUrl.trim();
     if (!trimmed) return DEFAULT_IMAGE;
+    
+    // Fix legacy localhost URLs stored in DB
+    if (trimmed.includes("localhost:5000")) {
+        trimmed = trimmed.replace("http://localhost:5000", "https://backend-twze.vercel.app");
+    }
+
     // Base64 data URLs stored directly in MongoDB
     if (trimmed.startsWith("data:")) return trimmed;
     if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) return trimmed;

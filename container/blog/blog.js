@@ -57,9 +57,14 @@ function createBlogCard(blog) {
     
     let imageUrl = './Assets/1.jpg';
     if (blog.image) {
-        imageUrl = blog.image.startsWith('data:') || blog.image.startsWith('http') 
-            ? blog.image 
-            : `https://backend-twze.vercel.app/${blog.image}`;
+        let tempImage = blog.image;
+        if (tempImage.includes('localhost:5000')) {
+            tempImage = tempImage.replace('http://localhost:5000', 'https://backend-twze.vercel.app');
+        }
+        
+        imageUrl = tempImage.startsWith('data:') || tempImage.startsWith('http') 
+            ? tempImage 
+            : `https://backend-twze.vercel.app/${tempImage}`;
     }
     
     card.innerHTML = `

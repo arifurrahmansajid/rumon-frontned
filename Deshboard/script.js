@@ -1,6 +1,6 @@
 const API_BASE_URL = "https://backend-twze.vercel.app/api";
-const DEFAULT_BLOG_IMAGE = "https://via.placeholder.com/400x200?text=Blog+Image";
-const DEFAULT_PROJECT_IMAGE = "https://via.placeholder.com/400x200?text=Project+Image";
+const DEFAULT_BLOG_IMAGE = "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1000";
+const DEFAULT_PROJECT_IMAGE = "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1000";
 
 const state = {
     currentPage: "home",
